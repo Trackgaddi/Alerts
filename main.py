@@ -5,7 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 from datetime import datetime
-  
+from fastapi import FastAPI
+
+app = FastAPI()
 subject = 'TrackGaddi'
 admin_email = ['wellwininfotech@yahoo.in','ankesh.maradia@gmail.com', 'ankitjain1790@gmail.com','nayan.xt@outlook.com','vivek.xtremethoughts@outlook.com']
 email_user = "trackgaddireports@gmail.com"
@@ -13,8 +15,9 @@ email_password = "iwusbsweblwvjgrm"
 #log_file = "C:/WT_Services/trackgaddi_server_check_log.txt"
 # log_file = "C:/Log/trackgaddi_server_check_log.txt"
 
-
- 
+@app.get("/")
+async def read_root():
+    return {"message": "Hello, world!"}
 def get_website_status():
     try:
            response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount',timeout=180)
