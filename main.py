@@ -17,7 +17,7 @@ email_password = "iwusbsweblwvjgrm"
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello, world!"}
+    return get_website_status()
 def get_website_status():
     try:
            response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount',timeout=180)
