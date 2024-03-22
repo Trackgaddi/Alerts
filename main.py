@@ -26,10 +26,11 @@ async def periodic_task():
 async def run_periodic_task():
     while True:
         await periodic_task()
-
+        
 @app.get("/")
 async def read_root():
-    return await run_periodic_task()
+    await run_periodic_task()
+    return {"message": "Hello, world!"}
     
 def get_website_status():
     try:
