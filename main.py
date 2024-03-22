@@ -29,7 +29,7 @@ async def run_periodic_task():
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello, world!"}
+    return await run_periodic_task()
     
 def get_website_status():
     try:
