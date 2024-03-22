@@ -16,17 +16,21 @@ email_password = "iwusbsweblwvjgrm"
 #log_file = "C:/WT_Services/trackgaddi_server_check_log.txt"
 # log_file = "C:/Log/trackgaddi_server_check_log.txt"
 
+app = FastAPI()
+
 async def periodic_task():
     while True:
         get_website_status()
         await asyncio.sleep(180)  # Sleep for 180 seconds (3 minutes)
         
+async def run_periodic_task():
+    while True:
+        await periodic_task()
+
 @app.get("/")
 async def read_root():
-    await periodic_task()
+    return {"message": "Hello, world!"}
     
-async def main():
-    await read_root()
 def get_website_status():
     try:
            response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount',timeout=180)
@@ -129,5 +133,7 @@ def send_sms(msg, templateId):
 #     file.close()
 
 
-if __name__ == '__main__':
-    asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.create_task(run_periodic_task())  # Start the periodic task
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # Run the FastAPI application
