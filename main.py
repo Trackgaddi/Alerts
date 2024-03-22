@@ -20,7 +20,8 @@ async def periodic_task():
     while True:
         get_website_status()
         await asyncio.sleep(180)  # Sleep for 180 seconds (3 minutes)
-
+        
+@app.get("/")
 async def read_root():
     await periodic_task()
     
