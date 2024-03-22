@@ -17,7 +17,7 @@ email_password = "iwusbsweblwvjgrm"
 
 async def periodic_task():
     while True:
-        await get_website_status()
+        get_website_status()
         await asyncio.sleep(180)  # Sleep for 180 seconds (3 minutes)
 
 async def read_root():
