@@ -23,8 +23,7 @@ async def periodic_task():
 
 async def read_root():
     await periodic_task()
-
-@app.get("/")
+    
 async def main():
     await read_root()
 def get_website_status():
