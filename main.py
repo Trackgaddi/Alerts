@@ -134,6 +134,6 @@ while True:
     time.sleep(1)
     
 if __name__ == "__main__":
-    asyncio.create_task(run_periodic_task())  # Start the periodic task
+    asyncio.create_task(read_root())  # Start the periodic task
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)  # Run the FastAPI application
