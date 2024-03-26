@@ -12,14 +12,23 @@ from fastapi import FastAPI
 
 app = FastAPI()
 subject = 'TrackGaddi'
-#admin_email = ['wellwininfotech@yahoo.in','ankesh.maradia@gmail.com', 'ankitjain1790@gmail.com','nayan.xt@outlook.com','vivek.xtremethoughts@outlook.com']
-admin_email = ['nayan.xt@outlook.com','vivek.xtremethoughts@outlook.com']
+admin_email = ['wellwininfotech@yahoo.in','ankesh.maradia@gmail.com', 'ankitjain1790@gmail.com','nayan.xt@outlook.com','vivek.xtremethoughts@outlook.com']
 email_user = "trackgaddireports@gmail.com"
 email_password = "iwusbsweblwvjgrm"
 #log_file = "C:/WT_Services/trackgaddi_server_check_log.txt"
 # log_file = "C:/Log/trackgaddi_server_check_log.txt"
 
 app = FastAPI()
+
+async def periodic_task():
+    while True:
+        await asyncio.sleep(300)  # Sleep for 180 seconds (3 minutes)
+
+async def run_periodic_task():
+    while True:
+        await periodic_task()
+
+asyncio.create_task(run_periodic_task())
 
 @app.get("/")
 @app.head("/") 
@@ -86,8 +95,8 @@ def get_website_status():
        send_error("Connection Timeout. TrackGaddi", str(1707168992511656154))
     except Exception as e:
       #  write_log(str(e)) 
-       send_error("Trackgaddi Server is down.", str(1707168992454683726))
-    time.sleep(60)
+       send_error("Trackgaddi Server is down.", str(1707168992454683726))    
+
 
 def send_error(error_msg, templateId):
    #  write_log(error_msg)
@@ -115,7 +124,7 @@ def send_email(email_body):
 def send_sms(msg, templateId):
    #response = requests.get("http://sms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRACK&channel=trans&DCS=0&flashsms=0&number=7878548818&text="+ msg +"",timeout=30)
    try:
-      response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=7878548818&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937",timeout=60)
+      response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=8401207238,9137323046,9326852540,7878548818,8160757199&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937",timeout=60) 
       print(response.text)
    except Exception as e:
        print("sms error")
@@ -126,13 +135,13 @@ def send_sms(msg, templateId):
 #     date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 #     file.write(date + ' : '+ log_msg +'\n')
 #     file.close()
-
 schedule.every(5).minutes.do(get_website_status)
 
 while True:
     schedule.run_pending()
     time.sleep(1)
-    
+
 if __name__ == "__main__":
-    asyncio.create_task(read_root())  # Start the periodic task
+    asyncio.create_task(run_periodic_task())  # Start the periodic task
+    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)  # Run the FastAPI application
