@@ -138,7 +138,7 @@ def send_sms(msg, templateId):
 #     file.write(date + ' : '+ log_msg +'\n')
 #     file.close()
 
-schedule.every(5).minutes.do(get_website_status())
+schedule.every(5).minutes.do(get_website_status)
 
 while True:
     schedule.run_pending()
