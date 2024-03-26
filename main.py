@@ -36,6 +36,7 @@ async def read_root():
     
 def get_website_status():
     try:
+           response3 = requests.get('https://system-alerts.onrender.com',timeout=180)
            response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount',timeout=180)
            api_response = response.json()
            response1 = requests.get('http://www.trackgaddi.com/api/v1/ApiHealthCheck/GetApiHealthCheck',timeout=30)
