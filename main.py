@@ -1,6 +1,7 @@
 import smtplib
 import requests
 import asyncio
+import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -95,8 +96,8 @@ def get_website_status():
        send_error("Connection Timeout. TrackGaddi", str(1707168992511656154))
     except Exception as e:
       #  write_log(str(e)) 
-       send_error("Trackgaddi Server is down.", str(1707168992454683726))    
-
+       send_error("Trackgaddi Server is down.", str(1707168992454683726))
+    time.sleep(60)
 
 def send_error(error_msg, templateId):
    #  write_log(error_msg)
