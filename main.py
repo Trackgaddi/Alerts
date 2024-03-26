@@ -112,7 +112,7 @@ async def get_website_status():
         send_error("Trackgaddi Server is down.", str(1707168992454683726))
     finally:
         try:
-            response0 = requests.get('https://pythonservicext.onrender.com', timeout=180)
+            response0 = requests.get('https://system-alerts.onrender.com', timeout=180)
         except Exception as e:
             # If an exception occurs while making the request in the finally block,
             # you may want to log the error or take appropriate action.
