@@ -21,17 +21,6 @@ email_password = "iwusbsweblwvjgrm"
 
 app = FastAPI()
 
-async def periodic_task():
-    while True:
-        get_website_status()
-        await asyncio.sleep(180)  # Sleep for 180 seconds (3 minutes)
-
-async def run_periodic_task():
-    while True:
-        await periodic_task()
-
-asyncio.create_task(run_periodic_task())
-
 @app.get("/")
 @app.head("/") 
 async def read_root():
