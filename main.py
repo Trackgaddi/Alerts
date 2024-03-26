@@ -12,7 +12,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 subject = 'TrackGaddi'
-admin_email = ['wellwininfotech@yahoo.in','ankesh.maradia@gmail.com', 'ankitjain1790@gmail.com','nayan.xt@outlook.com','vivek.xtremethoughts@outlook.com']
+admin_email = ['nayan.xt@outlook.com']
 email_user = "trackgaddireports@gmail.com"
 email_password = "iwusbsweblwvjgrm"
 #log_file = "C:/WT_Services/trackgaddi_server_check_log.txt"
@@ -124,7 +124,7 @@ def send_email(email_body):
 def send_sms(msg, templateId):
    #response = requests.get("http://sms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRACK&channel=trans&DCS=0&flashsms=0&number=7878548818&text="+ msg +"",timeout=30)
    try:
-      response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=8401207238,9137323046,9326852540,7878548818,8160757199&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937",timeout=60) 
+      response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=7878548818&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937",timeout=60) 
       print(response.text)
    except Exception as e:
        print("sms error")
