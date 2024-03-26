@@ -1,6 +1,7 @@
 import smtplib
 import requests
 import asyncio
+import schedule
 import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -137,7 +138,12 @@ def send_sms(msg, templateId):
 #     file.write(date + ' : '+ log_msg +'\n')
 #     file.close()
 
+schedule.every(5).minutes.do(get_website_status())
 
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+    
 if __name__ == "__main__":
     asyncio.create_task(run_periodic_task())  # Start the periodic task
     import uvicorn
