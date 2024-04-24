@@ -139,7 +139,7 @@ def send_email(email_body):
 def send_sms(msg, templateId):
     try:
         # response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=8401207238,9137323046,9326852540,7878548818,8160757199&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937", timeout=60)
-        response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=8401207238,9137323046,9326852540,7878548818,8160757199&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937", timeout=60)
+        response = requests.get("http://mysms.onlinebusinessbazaar.in/api/mt/SendSMS?user=wellwin&password=sms123&senderid=VTRAKK&channel=Trans&DCS=0&flashsms=0&number=8401207238,9737213291,9137323046,9326852540,7878548818,8160757199&text="+ msg +"&route=06&DLTTemplateId="+templateId+"&PEID=1201159282315113937", timeout=60)
         print(response.text)
     except Exception as e:
         print("sms error")
