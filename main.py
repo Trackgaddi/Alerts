@@ -75,7 +75,7 @@ async def get_website_status():
                 else:
                     percent_count = 40
 
-                if unreachable >= percent_count and portNumber != 0:
+                if unreachable >= percent_count:
                     down_apis.append(str(api_data))
                     size = len(down_apis)
 
