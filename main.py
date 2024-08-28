@@ -83,6 +83,9 @@ async def get_website_status():
                 dbname = str(api_data['DbName'])
                 tblname = str(api_data['TableName'])
                 percent = int(api_data['percent'])
+                smsBalanceAlert = str(api_data['SmsBalanceAlert'])                
+                if smsBalanceAlert != "":
+                    send_error("\n"+str(smsBalanceAlert),"0")
                 if percent > 90:
                     send_error("Database:" + str(dbname) + "\n table Name:" + str(tblname) + "\n percent reach:" + str(percent), "0")
                     send_error("Trackgaddi Server is down.", str(1707168992454683726))
