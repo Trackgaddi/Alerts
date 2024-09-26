@@ -112,7 +112,9 @@ async def get_website_status():
     except requests.Timeout:
         send_error("Connection Timeout. TrackGaddi", str(1707168992511656154))
     except Exception as e:
-        send_email("Trackgaddi Server is down."+str(e))
+        send_email(api_response)
+        send_email(api_response1)
+        send_email(api_response2)
         send_error("Trackgaddi Server is down.", str(1707168992454683726))
     finally:
         try:
