@@ -106,7 +106,19 @@ async def get_website_status():
                 # response0 = requests.get('https://pythonservicext.onrender.com', timeout=180)
                 
                 print("No issues found. Function executed successfully.")  # Add a message to indicate successful execution
-                
+    # Specify the file name
+    file_name = "logs.txt"
+    
+    # Open the file in write mode ('w'). If the file does not exist, it will be created.
+    with open(file_name, "w") as file:
+        # Write the text to the file
+        file.write("Hello, this is a sample text file.\n")
+        file.write("You can add more lines by using multiple write statements.\n")
+        file.write("This is another line.\n")
+    
+    # After the 'with' block, the file is automatically closed.
+    print(f"Text written to {file_name} successfully.")
+
     except requests.ConnectionError:
         send_error("Connection Error. TrackGaddi", str(1707168992519849614))
     except requests.Timeout:
