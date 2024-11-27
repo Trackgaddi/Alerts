@@ -49,9 +49,9 @@ async def get_website_status():
         
         response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount', timeout=180)
         api_response = response.json()
-        response1 = requests.get('http://www.trackgaddi.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=30)
+        response1 = requests.get('http://www.trackgaddi.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=60)
         api_response1 = response1.json()
-        response2 = requests.get('http://gaddi24.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=30)
+        response2 = requests.get('http://gaddi24.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=60)
         api_response2 = response2.json()
 
         if response.status_code != 200:
@@ -121,8 +121,14 @@ async def get_website_status():
             print(f"Text written to {file_name} successfully.")
 
     except requests.ConnectionError:
+        send_email(api_response)
+        send_email(api_response1)
+        send_email(api_response2)
         send_error("Connection Error. TrackGaddi", str(1707168992519849614))
     except requests.Timeout:
+        send_email(api_response)
+        send_email(api_response1)
+        send_email(api_response2)
         send_error("Connection Timeout. TrackGaddi", str(1707168992511656154))
     except Exception as e:
         send_email(api_response)
