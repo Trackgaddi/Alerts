@@ -54,7 +54,7 @@ async def get_website_status():
         response2 = requests.get('http://gaddi24.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=60)
         api_response2 = response2.json()
 
-        if response.status_code == 200:
+        if response.status_code != 200:
             send_error("Trackgaddi Server is down.", str(1707168992454683726))
             # response0 = requests.get('https://pythonservicext.onrender.com', timeout=180)
 
