@@ -8,6 +8,7 @@ from email import encoders
 from datetime import datetime
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+import time
 
 app = FastAPI()
 
@@ -165,7 +166,18 @@ def send_sms(msg, templateId):
         print(response.text)
     except Exception as e:
         print("sms error")
-
+        
+def main():
+    while True:
+        try:
+            print("Render host is running...")
+            await get_website_status()
+            time.sleep(5)  # Adjust sleep time as needed
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(10)  # Wait before retrying
+            
 if __name__ == "__main__":
     import uvicorn
+    main()
     uvicorn.run(app, host="0.0.0.0", port=8000)
