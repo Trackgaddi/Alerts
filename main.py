@@ -167,7 +167,7 @@ def send_sms(msg, templateId):
     except Exception as e:
         print("sms error")
         
-def main():
+async def main():
     while True:
         try:
             print("Render host is running...")
