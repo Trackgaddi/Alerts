@@ -167,18 +167,7 @@ def send_sms(msg, templateId):
         print(response.text)
     except Exception as e:
         print("sms error")
-        
-async def main():
-    while True:
-        try:
-            print("Render host is running...")
-            await get_website_status()
-            time.sleep(1)  # Adjust sleep time as needed
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(10)  # Wait before retrying
             
 if __name__ == "__main__":
     import uvicorn
-    main()
     uvicorn.run(app, host="0.0.0.0", port=8000)
