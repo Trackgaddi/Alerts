@@ -7,6 +7,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 from datetime import datetime
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 
 app = FastAPI()
 
@@ -18,24 +19,24 @@ email_user = "trackgaddireports1@gmail.com"
 email_password = "txqrdkvxwrduspwy"
 
 # Disable the automatic shutdown event
-
+# Background task to run `get_website_status` every 5 minutes
 async def periodic_task():
     while True:
-        print("Entered periodic_task")
+        print("Running periodic website check...")
         await get_website_status()
-        print("Entering sleep")
-        await asyncio.sleep(300)  # Sleep for 300 seconds (5 minutes)
-        print("Out of sleep")
+        await asyncio.sleep(300)  # 5 minutes delay
 
-async def run_periodic_task():
-    while True:
-        print("Entered run_periodic_task")
-        await periodic_task()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    task = asyncio.create_task(periodic_task())  # Start the background task
+    yield  # Run the app
+    task.cancel()  # Cleanup when the app shuts down
 
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
-@app.head("/")
 async def read_root():
+    await get_website_status()
     return {"message": "Hello, world!"}
 
 async def get_website_status():
@@ -167,4 +168,4 @@ def send_sms(msg, templateId):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
