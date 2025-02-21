@@ -116,7 +116,7 @@ async def get_website_status():
                 file.write("This is another line.\n")
             
             # After the 'with' block, the file is automatically closed.
-            await rerun()
+            await periodic_task()
             print(f"Text written to {file_name} successfully.")
 
     except requests.ConnectionError:
