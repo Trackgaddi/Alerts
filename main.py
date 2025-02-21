@@ -18,9 +18,6 @@ email_user = "trackgaddireports@gmail.com"
 email_password = "iwusbsweblwvjgrm"
 
 # Disable the automatic shutdown event
-@app.on_event("shutdown")
-async def shutdown_event():
-    pass
 
 async def periodic_task():
     while True:
@@ -35,7 +32,6 @@ async def run_periodic_task():
         print("Entered run_periodic_task")
         await periodic_task()
 
-asyncio.create_task(run_periodic_task())
 
 @app.get("/")
 @app.head("/")
