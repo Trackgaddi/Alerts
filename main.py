@@ -117,7 +117,8 @@ async def get_website_status():
             
             # After the 'with' block, the file is automatically closed.
             print(f"Text written to {file_name} successfully.")
-            requests.get('https://trackgaddi-server-check.onrender.com/', timeout=180)
+            rerun = requests.get('https://trackgaddi-server-check.onrender.com/', timeout=180)
+            print(rerun.json())
 
     except requests.ConnectionError:
         send_email(api_response)
