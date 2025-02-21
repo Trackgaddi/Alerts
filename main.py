@@ -116,8 +116,8 @@ async def get_website_status():
                 file.write("This is another line.\n")
             
             # After the 'with' block, the file is automatically closed.
-            await periodic_task()
             print(f"Text written to {file_name} successfully.")
+            await periodic_task()
 
     except requests.ConnectionError:
         send_email(api_response)
@@ -159,25 +159,6 @@ def send_email(email_body):
     server.login(email_user, email_password)
     server.sendmail(email_user, admin_email, text)
     server.quit()
-
-async def rerun():
-    url = 'https://trackgaddi-server-check.onrender.com/'
-
-    for attempt in range(3):  # Try up to 3 times
-        try:
-            response = requests.get(url, timeout=10)  # Reduced timeout to 10 sec
-            response.raise_for_status()  # Raise error for bad responses
-            print(f"Success: {response.status_code}")
-            return response.json()  # Return JSON if successful
-        except requests.Timeout:
-            print(f"Timeout attempt {attempt + 1}/3 for {url}")
-        except requests.RequestException as e:
-            print(f"Request error: {e}")
-        
-        await asyncio.sleep(2)  # Wait before retrying
-
-    print("Failed to reach server after 3 attempts")
-    return None  # Return None if all attempts fail
     
 def send_sms(msg, templateId):
     try:
