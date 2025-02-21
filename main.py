@@ -25,7 +25,7 @@ async def periodic_task():
     while True:
         print("Running periodic website check...")
         await get_website_status()
-        await asyncio.sleep(30)  # 5 minutes delay
+        await asyncio.sleep(1)  # 5 minutes delay
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -172,7 +172,7 @@ async def main():
         try:
             print("Render host is running...")
             await get_website_status()
-            time.sleep(5)  # Adjust sleep time as needed
+            time.sleep(1)  # Adjust sleep time as needed
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(10)  # Wait before retrying
