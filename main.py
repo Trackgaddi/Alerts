@@ -24,7 +24,7 @@ async def periodic_task():
     while True:
         print("Running periodic website check...")
         await get_website_status()
-        await asyncio.sleep(300)  # 5 minutes delay
+        await asyncio.sleep(120)  # 5 minutes delay
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
