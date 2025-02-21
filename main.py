@@ -144,7 +144,8 @@ async def get_website_status():
 
 def send_error(error_msg, templateId):
     send_email(error_msg)
-
+    send_sms(error_msg, templateId)
+    
 def send_email(email_body):
     msg = MIMEMultipart()
     msg['From'] = email_user
