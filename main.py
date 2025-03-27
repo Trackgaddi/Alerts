@@ -24,7 +24,6 @@ email_password = "txqrdkvxwrduspwy"
 async def periodic_task():
     while True:
         print("Running periodic website check...")
-        run_for_five_minutes()
         await get_website_status()
         await asyncio.sleep(1)  # 5 minutes delay
 
@@ -39,7 +38,6 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def read_root():
     await periodic_task()
-    run_for_five_minutes()
     await get_website_status()
     return {"message": "Hello, world!"}
 
@@ -119,6 +117,7 @@ async def get_website_status():
                 file.write("This is another line.\n")
             
             # After the 'with' block, the file is automatically closed.
+            run_for_five_minutes()
             print(f"Text written to {file_name} successfully.")
 
     except requests.ConnectionError:
