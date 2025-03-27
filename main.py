@@ -45,8 +45,7 @@ async def get_website_status():
     try:
         # response0 = requests.get('https://pythonservicext.onrender.com', timeout=180)
         
-        response = 
-        
+        response = requests.get('http://52.76.115.44/api/v1/Monitoring/PortVehicleCount', timeout=180)        
         api_response = response.json()
         response1 = requests.get('http://www.trackgaddi.com/api/v1/ApiHealthCheck/GetApiHealthCheck', timeout=60)
         api_response1 = response1.json()
@@ -150,6 +149,7 @@ async def run_for_five_minutes():
     while (time.time() - start_time) < 45:  # Run for 45 seconds
         elapsed_time = int(time.time() - start_time)
         remaining_time = 45 - elapsed_time
+        requests.get('https://trackgaddi-server-check.onrender.com')
         await asyncio.sleep(1)  # Wait for 1 second before the next iteration
     
     print("Function has completed 5 minutes of execution.")
