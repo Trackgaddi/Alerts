@@ -117,7 +117,7 @@ async def get_website_status():
                 file.write("This is another line.\n")
             
             # After the 'with' block, the file is automatically closed.
-            run_for_five_minutes()
+            await run_for_five_minutes()
             print(f"Text written to {file_name} successfully.")
 
     except requests.ConnectionError:
@@ -144,13 +144,14 @@ async def get_website_status():
             # For example, you can print the error message:
             print("An error occurred in the finally block:", str(e))
 
-def run_for_five_minutes():
+async def run_for_five_minutes():
     start_time = time.time()  # Get the current time
     while (time.time() - start_time) < 300:  # Run for 300 seconds (5 minutes)
         # Perform the desired action here
         print("Function is running...")  # Example action
     
     print("Function has completed 5 minutes of execution.")
+    await get_website_status()
     
 def send_error(error_msg, templateId):
     send_email(error_msg)
