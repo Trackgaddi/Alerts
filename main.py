@@ -149,7 +149,6 @@ def run_for_five_minutes():
     while (time.time() - start_time) < 300:  # Run for 300 seconds (5 minutes)
         # Perform the desired action here
         print("Function is running...")  # Example action
-        time.sleep(1)  # Sleep for a short duration to avoid excessive CPU usage
     
     print("Function has completed 5 minutes of execution.")
     
