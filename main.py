@@ -24,7 +24,7 @@ email_password = "txqrdkvxwrduspwy"
 async def periodic_task():
     while True:
         print("Running periodic website check...")
-        await get_website_status()
+        await run_for_five_minutes()
         await asyncio.sleep(1)  # 5 minutes delay
 
 @asynccontextmanager
@@ -38,7 +38,7 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def read_root():
     await periodic_task()
-    await get_website_status()
+    await run_for_five_minutes()
     return {"message": "Hello, world!"}
 
 async def get_website_status():
@@ -117,7 +117,6 @@ async def get_website_status():
                 file.write("This is another line.\n")
             
             # After the 'with' block, the file is automatically closed.
-            await run_for_five_minutes()
             print(f"Text written to {file_name} successfully.")
 
     except requests.ConnectionError:
@@ -145,13 +144,15 @@ async def get_website_status():
             print("An error occurred in the finally block:", str(e))
 
 async def run_for_five_minutes():
+    await get_website_status()
     start_time = time.time()  # Get the current time
+    
     while (time.time() - start_time) < 300:  # Run for 300 seconds (5 minutes)
-        # Perform the desired action here
-        print("Function is running...")  # Example action
+        elapsed_time = int(time.time() - start_time)
+        remaining_time = 300 - elapsed_time
+        print(f"Time remaining: {remaining_time} seconds")
     
     print("Function has completed 5 minutes of execution.")
-    await get_website_status()
     
 def send_error(error_msg, templateId):
     send_email(error_msg)
