@@ -25,7 +25,6 @@ async def periodic_task():
     while True:
         print("Running periodic website check...")
         await run_for_five_minutes()
-        await asyncio.sleep(1)  # 5 minutes delay
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -150,7 +149,7 @@ async def run_for_five_minutes():
     while (time.time() - start_time) < 150:  # Run for 150 seconds (5 minutes)
         elapsed_time = int(time.time() - start_time)
         remaining_time = 150 - elapsed_time
-        print(f"Time remaining: {remaining_time} seconds")
+        print(f"{remaining_time}s")
     
     print("Function has completed 5 minutes of execution.")
     
