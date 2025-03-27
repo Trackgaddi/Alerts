@@ -143,7 +143,15 @@ async def get_website_status():
             # For example, you can print the error message:
             print("An error occurred in the finally block:", str(e))
 
-
+def run_for_five_minutes():
+    start_time = time.time()  # Get the current time
+    while (time.time() - start_time) < 300:  # Run for 300 seconds (5 minutes)
+        # Perform the desired action here
+        print("Function is running...")  # Example action
+        time.sleep(1)  # Sleep for a short duration to avoid excessive CPU usage
+    
+    print("Function has completed 5 minutes of execution.")
+    
 def send_error(error_msg, templateId):
     send_email(error_msg)
     send_sms(error_msg, templateId)
@@ -159,6 +167,7 @@ def send_email(email_body):
     server.login(email_user, email_password)
     server.sendmail(email_user, admin_email, text)
     server.quit()
+    run_for_five_minutes()
     
 def send_sms(msg, templateId):
     try:
