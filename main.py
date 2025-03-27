@@ -147,9 +147,9 @@ async def run_for_five_minutes():
     await get_website_status()
     start_time = time.time()  # Get the current time
     
-    while (time.time() - start_time) < 300:  # Run for 300 seconds (5 minutes)
+    while (time.time() - start_time) < 150:  # Run for 150 seconds (5 minutes)
         elapsed_time = int(time.time() - start_time)
-        remaining_time = 300 - elapsed_time
+        remaining_time = 150 - elapsed_time
         print(f"Time remaining: {remaining_time} seconds")
     
     print("Function has completed 5 minutes of execution.")
