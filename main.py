@@ -24,6 +24,7 @@ email_password = "txqrdkvxwrduspwy"
 async def periodic_task():
     while True:
         print("Running periodic website check...")
+        run_for_five_minutes()
         await get_website_status()
         await asyncio.sleep(1)  # 5 minutes delay
 
@@ -167,7 +168,6 @@ def send_email(email_body):
     server.login(email_user, email_password)
     server.sendmail(email_user, admin_email, text)
     server.quit()
-    run_for_five_minutes()
     
 def send_sms(msg, templateId):
     try:
