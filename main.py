@@ -146,10 +146,11 @@ async def run_for_five_minutes():
     await get_website_status()
     start_time = time.time()  # Get the current time
     
-    while (time.time() - start_time) < 45:  # Run for 45 seconds (5 minutes)
+    while (time.time() - start_time) < 45:  # Run for 45 seconds
         elapsed_time = int(time.time() - start_time)
         remaining_time = 45 - elapsed_time
-        print(f"{remaining_time}s")
+        print(f"{remaining_time}s remaining")
+        await asyncio.sleep(1)  # Wait for 1 second before the next iteration
     
     print("Function has completed 5 minutes of execution.")
     
