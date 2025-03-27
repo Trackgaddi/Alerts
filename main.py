@@ -150,7 +150,7 @@ async def run_for_five_minutes():
     while (time.time() - start_time) < 45:  # Run for 45 seconds
         elapsed_time = int(time.time() - start_time)
         remaining_time = 45 - elapsed_time
-        requests.get('https://trackgaddi-server-check.onrender.com')
+        response4 = requests.get('https://trackgaddi-server-check.onrender.com')
         await asyncio.sleep(1)  # Wait for 1 second before the next iteration
     
     print("Function has completed 5 minutes of execution.")
