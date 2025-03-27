@@ -39,6 +39,7 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def read_root():
     await periodic_task()
+    run_for_five_minutes()
     await get_website_status()
     return {"message": "Hello, world!"}
 
